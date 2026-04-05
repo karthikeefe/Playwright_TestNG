@@ -1,11 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-<suite name="All Test Suite">
+<suite name="All Test Suite" parallel="tests" thread-count="2">
     <listeners>
         <listener class-name="org.qa.amazon.Utils.ScreenshotOnFailureListener"/>
         <listener class-name="org.qa.amazon.Utils.AnnotationTransformer"/>
     </listeners>
-    <test verbose="2" preserve-order="true" name="C:/Users/karth/IdeaProjects/Playwright">
+    <test name="ChromeBrowserTests">
+        <parameter name="browser" value="chrome"/>
+        <classes>
+            <class name="org.qa.amazon.Test.HomePageTest">
+                <methods>
+                    <include name="verifyHomePageTitle"/>
+                    <include name="verifyURL"/>
+                </methods>
+            </class>
+            <class name="org.qa.amazon.Test.LoginPageTest">
+                <methods>
+                    <include name="verifyLoginPageTitle"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="firefoxBrowserTests">
+        <parameter name="browser" value="firefox"/>
         <classes>
             <class name="org.qa.amazon.Test.HomePageTest">
                 <methods>

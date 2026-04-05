@@ -6,6 +6,7 @@ import org.qa.amazon.pages.HomePage;
 import org.qa.amazon.pages.LoginPage;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
+import org.testng.annotations.Parameters;
 
 public class BaseTest {
 
@@ -16,9 +17,10 @@ public class BaseTest {
     protected static LoginPage loginPage;
 
     @BeforeTest
-    public void setup(){
+    @Parameters("browser")
+    public void setup(String browserName){
          pf = new PlaywrightFactory();
-         String browserName = pf.init_properties().getProperty("browser").trim();
+         pf.init_properties();
          page = pf.initBrowser(browserName);
          // initialize HomePage once here so it's available to all test classes in the same <test>
          homePage = new HomePage(page);
