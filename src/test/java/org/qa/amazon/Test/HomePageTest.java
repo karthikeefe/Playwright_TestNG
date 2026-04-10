@@ -13,6 +13,7 @@ public class HomePageTest extends BaseTest {
     public void verifyHomePageTitle(){
         String title = homePage.pageTitle();
         System.out.println("Home page title is :"+ title);
+
         Assert.assertEquals(title, AppConstants.HOME_PAGE_TITLE);
     }
 

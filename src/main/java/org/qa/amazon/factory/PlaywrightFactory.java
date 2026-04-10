@@ -2,6 +2,7 @@ package org.qa.amazon.factory;
 
 import com.microsoft.playwright.*;
 
+import javax.naming.Context;
 import java.io.FileInputStream;
 import java.util.Properties;
 
@@ -13,6 +14,9 @@ public class PlaywrightFactory {
     BrowserContext context;
     Page page;
     Properties prop;
+
+    APIRequest request;
+    APIRequestContext apiRequestContext;
 
     private static ThreadLocal<Playwright> tlPlaywright = new ThreadLocal<>();
     private static ThreadLocal<Browser> tlBrowser = new ThreadLocal<>();
@@ -59,6 +63,13 @@ public class PlaywrightFactory {
         getPage().navigate(prop.getProperty("url").trim());
 
         return getPage();
+
+    }
+
+    public APIRequestContext initAPI(){
+        tlPlaywright.set(Playwright.create());
+        request = getPlaywright().request();
+        return request.newContext();
 
     }
 

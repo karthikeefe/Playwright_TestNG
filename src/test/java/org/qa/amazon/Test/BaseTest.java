@@ -8,6 +8,8 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Parameters;
 
+import java.util.Properties;
+
 public class BaseTest {
 
     // share browser and page across all test-class instances within the same <test> tag
@@ -15,12 +17,13 @@ public class BaseTest {
     protected static Page page;
     protected static HomePage homePage;
     protected static LoginPage loginPage;
+    Properties  prop;
 
     @BeforeTest
     @Parameters("browser")
     public void setup(String browserName){
          pf = new PlaywrightFactory();
-         pf.init_properties();
+        prop =  pf.init_properties();
          page = pf.initBrowser(browserName);
          // initialize HomePage once here so it's available to all test classes in the same <test>
          homePage = new HomePage(page);
